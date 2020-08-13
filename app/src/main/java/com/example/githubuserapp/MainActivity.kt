@@ -32,8 +32,6 @@ class MainActivity : AppCompatActivity() {
         rv_list.setHasFixedSize(true)
         list.addAll(getListGithubUser())
         showRecyclerList()
-
-//        showSelectedItem()
     }
 
     private fun showRecyclerList() {
@@ -41,15 +39,7 @@ class MainActivity : AppCompatActivity() {
         val listGithubUserAdapter = GithubUserAdapter(list)
         rv_list.adapter = listGithubUserAdapter
     }
-//    private fun showSelectedItem(){
-//        lv_list.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-//            Toast.makeText(this@MainActivity, githubusers[position].name, Toast.LENGTH_SHORT).show()
-//            val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
-//                putExtra(DetailActivity.EXTRA_USER, githubusers[position])
-//            }
-//            startActivity(intent)
-//        }
-//    }
+
     fun getListGithubUser() : ArrayList<GithubUser>{
         dataUsername = resources.getStringArray(R.array.username)
         dataName = resources.getStringArray(R.array.name)
