@@ -28,12 +28,11 @@ class MainActivity : AppCompatActivity() {
     super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        rv_list.setHasFixedSize(true)
-
-//        adapter = GithubUserAdapter(this)
-//        lv_list.adapter = adapter
+//        rv_list.setHasFixedSize(true)
+        adapter = GithubUserAdapter(this)
+        lv_list.adapter = adapter
         addItem()
-//        showSelectedItem()
+        showSelectedItem()
     }
 
     private fun addItem() {
@@ -58,16 +57,16 @@ class MainActivity : AppCompatActivity() {
             )
             githubusers.add(githubuser)
         }
-//        adapter.githubusers = githubusers
+        adapter.githubusers = githubusers
     }
 
-//    private fun showSelectedItem(){
-//        lv_list.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-//            Toast.makeText(this@MainActivity, githubusers[position].name, Toast.LENGTH_SHORT).show()
-//            val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
-//                putExtra(DetailActivity.EXTRA_USER, githubusers[position])
-//            }
-//            startActivity(intent)
-//        }
+    private fun showSelectedItem(){
+        lv_list.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+            Toast.makeText(this@MainActivity, githubusers[position].name, Toast.LENGTH_SHORT).show()
+            val intent = Intent(this@MainActivity, DetailActivity::class.java).apply {
+                putExtra(DetailActivity.EXTRA_USER, githubusers[position])
+            }
+            startActivity(intent)
+        }
     }
-//}
+}
