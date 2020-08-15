@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.core.widget.NestedScrollView xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical"
-    android:fillViewport="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
+    tools:context=".MainActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/appBar"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/colorPrimary"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:title="@string/app_name">
     <LinearLayout android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
-
         xmlns:android="http://schemas.android.com/apk/res/android">
         <RelativeLayout
             android:layout_width="match_parent"
@@ -213,22 +221,19 @@
                     android:text="@string/tv_following"/>
             </RelativeLayout>
         </LinearLayout>
-        <LinearLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+    </LinearLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="?attr/colorPrimary"
+            app:tabTextColor="@android:color/black"/>
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabTextColor="@android:color/black"/>
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/view_pager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-</LinearLayout>
-</androidx.core.widget.NestedScrollView>
-
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
