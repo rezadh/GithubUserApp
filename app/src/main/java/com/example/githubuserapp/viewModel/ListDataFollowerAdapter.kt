@@ -1,22 +1,32 @@
-package com.example.githubuserapp
+package com.example.githubuserapp.viewModel
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.githubuserapp.R
+import com.example.githubuserapp.model.GithubUser
 import kotlinx.android.synthetic.main.item_row_githubuser.view.*
 
+class ListDataFollowerAdapter(private val listDataFollower: ArrayList<GithubUser>) : RecyclerView.Adapter<ListDataFollowerAdapter.ListViewHolder>() {
+    fun setData(items: ArrayList<GithubUser>) {
+        listDataFollower.clear()
+        listDataFollower.addAll(items)
+        notifyDataSetChanged()
+    }
 
-class GithubUserAdapter(private val listGithubUser: ArrayList<GithubUser>) : RecyclerView.Adapter<GithubUserAdapter.ListViewHolder>() {
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ListViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_row_githubuser, viewGroup, false)
         return ListViewHolder(view)
     }
 
-    override fun getItemCount(): Int = listGithubUser.size
+    override fun getItemCount(): Int = listDataFollower.size
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(listGithubUser[position])
+        holder.bind(listDataFollower[position])
     }
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -26,7 +36,10 @@ class GithubUserAdapter(private val listGithubUser: ArrayList<GithubUser>) : Rec
                 tv_item_name.text = githubuser.name
                 tv_item_company.text = githubuser.company
                 tv_item_location.text = githubuser.location
-                img_item_photo.setImageResource(githubuser.avatar!!)
+                Glide.with(itemView.context)
+                    .load(githubuser.avatar)
+                    .apply(RequestOptions().override(95, 95))
+                    .into(img_item_photo)
             }
         }
     }
