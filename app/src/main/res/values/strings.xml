@@ -6,7 +6,7 @@
     <string name="location">item lokasi</string>
     <string name="search">Pencarian</string>
     <string name="menu_1">Menu</string>
-    <string name="search_hint">Masukkan kata</string>
+    <string name="search_hint">Pencarian…</string>
     <string name="language">Pengaturan bahasa</string>
     <string name="item_githubaddress">item alamat github</string>
     <string name="dummy_data">12</string>

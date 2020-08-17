@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
 
-                return true
+                return false
             }
             override fun onQueryTextChange(newText: String): Boolean {
                 if (newText.isNotEmpty()) {
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     return true
                 }
-                return false
+                return true
             }
         })
     return true

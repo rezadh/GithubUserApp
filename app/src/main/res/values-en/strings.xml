@@ -7,7 +7,7 @@
     <string name="location">item location</string>
     <string name="search">Search</string>
     <string name="menu_1">Menu</string>
-    <string name="search_hint">Search Hint</string>
+    <string name="search_hint">Search Hint…</string>
     <string name="language">Change Language Settings</string>
     <string name="item_githubaddress">item github address</string>
     <string name="dummy_data">12</string>
