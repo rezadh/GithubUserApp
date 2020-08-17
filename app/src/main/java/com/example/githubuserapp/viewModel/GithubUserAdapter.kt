@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.githubuserapp.DetailActivity
+import com.example.githubuserapp.view.DetailActivity
 import com.example.githubuserapp.R
 import com.example.githubuserapp.model.GithubUser
 import kotlinx.android.synthetic.main.item_row_githubuser.view.*
@@ -41,7 +41,9 @@ class GithubUserAdapter(private val listGithubUser: ArrayList<GithubUser>) : Rec
                 data.location,
                 data.repository,
                 data.follower,
-                data.following
+                data.following,
+                data.gists,
+                data.githubaddress
             )
             val mIntent = Intent(it.context, DetailActivity::class.java)
             mIntent.putExtra(DetailActivity.EXTRA_USER, dataUserIntent)
@@ -53,9 +55,7 @@ class GithubUserAdapter(private val listGithubUser: ArrayList<GithubUser>) : Rec
         fun bind(githubuser : GithubUser){
             with(itemView){
                 tv_item_username.text = githubuser.username
-                tv_item_name.text = githubuser.name
-                tv_item_company.text = githubuser.company
-                tv_item_location.text = githubuser.location
+                tv_item_github.text = githubuser.githubaddress
                 Glide.with(itemView.context)
                     .load(githubuser.avatar)
                     .apply(RequestOptions().override(95, 95))

@@ -12,5 +12,7 @@ data class GithubUser(
     var location: String? = "",
     var repository: String? = "",
     var follower: String? = "",
-    var following: String? = ""
+    var following: String? = "",
+    var gists: String? = "",
+    var githubaddress: String? = ""
 ) : Parcelable

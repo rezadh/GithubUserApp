@@ -1,4 +1,4 @@
-package com.example.githubuserapp
+package com.example.githubuserapp.view.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,13 +8,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.githubuserapp.R
 import com.example.githubuserapp.model.GithubUser
-import com.example.githubuserapp.viewModel.FollowerViewModel
 import com.example.githubuserapp.viewModel.FollowingViewModel
-import com.example.githubuserapp.viewModel.ListDataFollowerAdapter
 import com.example.githubuserapp.viewModel.ListDataFollowingAdapter
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_follower.*
 import kotlinx.android.synthetic.main.fragment_following.*
 
 class FollowingFragment : Fragment() {
@@ -23,7 +20,7 @@ class FollowingFragment : Fragment() {
     private lateinit var adapter: ListDataFollowingAdapter
     private lateinit var followingViewModel: FollowingViewModel
     companion object {
-        val TAG = FollowingFragment::class.java.simpleName
+        val TAG: String = FollowingFragment::class.java.simpleName
         const val EXTRA_USER = "extra_user"
     }
 
@@ -36,6 +33,8 @@ class FollowingFragment : Fragment() {
             this, ViewModelProvider.NewInstanceFactory()
         ).get(FollowingViewModel::class.java)
         val dataUser = activity!!.intent.getParcelableExtra<GithubUser>(EXTRA_USER) as GithubUser
+        showLoading(true)
+
         rv_following_fragment.layoutManager = LinearLayoutManager(activity)
         rv_following_fragment.setHasFixedSize(true)
         rv_following_fragment.adapter = adapter
@@ -53,7 +52,6 @@ class FollowingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_following, container, false)
     }
     private fun showLoading(state: Boolean) {

@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githubuserapp.FollowingFragment
+import com.example.githubuserapp.view.fragment.FollowingFragment
 import com.example.githubuserapp.model.GithubUser
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
@@ -82,7 +82,7 @@ class FollowingViewModel : ViewModel() {
                 Log.d(FollowingFragment.TAG, result.toString())
 
                 try {
-                    val jsonObject = JSONObject(result)
+                    val jsonObject = JSONObject(result.toString())
                     val usersData = GithubUser()
                     usersData.username = jsonObject.getString("login")
                     usersData.name = jsonObject.getString("name")
@@ -92,6 +92,7 @@ class FollowingViewModel : ViewModel() {
                     usersData.repository = jsonObject.getString("public_repos")
                     usersData.follower = jsonObject.getString("followers")
                     usersData.following = jsonObject.getString("following")
+                    usersData.githubaddress = jsonObject.getString("html_url")
                     listFollowingNonMutable.add(usersData)
                     listFollowingMutable.postValue(listFollowingNonMutable)
                 } catch (e: Exception) {

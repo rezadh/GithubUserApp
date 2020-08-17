@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.githubuserapp.model.GithubUser
-import com.example.githubuserapp.MainActivity
+import com.example.githubuserapp.view.MainActivity
 import org.json.JSONArray
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
@@ -82,7 +82,7 @@ class MainViewModel : ViewModel() {
                 Log.d(MainActivity.TAG, result.toString())
 
                 try {
-                    val jsonObject = JSONObject(result)
+                    val jsonObject = JSONObject(result.toString())
                     val usersData = GithubUser()
                     usersData.username = jsonObject.getString("login")
                     usersData.name = jsonObject.getString("name")
@@ -92,6 +92,8 @@ class MainViewModel : ViewModel() {
                     usersData.repository = jsonObject.getString("public_repos")
                     usersData.follower = jsonObject.getString("followers")
                     usersData.following = jsonObject.getString("following")
+                    usersData.gists = jsonObject.getString("public_gists")
+                    usersData.githubaddress = jsonObject.getString("html_url")
                     listUsersNonMutable.add(usersData)
                     listUsersMutable.postValue(listUsersNonMutable)
                 } catch (e: Exception) {
@@ -133,7 +135,7 @@ class MainViewModel : ViewModel() {
                 Log.d(MainActivity.TAG, result.toString())
                 try {
                     listUsersNonMutable.clear()
-                    val jsonArray = JSONObject(result)
+                    val jsonArray = JSONObject(result.toString())
                     val item = jsonArray.getJSONArray("items")
                     for (i in 0 until item.length()) {
                         val jsonObject = item.getJSONObject(i)

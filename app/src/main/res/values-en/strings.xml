@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GithubUserApp</string>
+    <string name="item_username">rezadwihendarno</string>
+    <string name="item_name">reza dwi</string>
+    <string name="company">item company</string>
+    <string name="location">item location</string>
+    <string name="search">Search</string>
+    <string name="menu_1">Menu</string>
+    <string name="search_hint">Search Hint</string>
+    <string name="language">Change Language Settings</string>
+    <string name="item_githubaddress">item github address</string>
+    <string name="dummy_data">12</string>
+    <string name="tv_repositori">repository</string>
+    <string name="tv_gists">gists</string>
+    <string name="tv_follower">follower</string>
+    <string name="tv_following">following</string>
+    <string name="following">following</string>
+    <string name="follower">follower</string>
+    <string name="detail_user">Detail User</string>
+
+</resources>
