@@ -33,10 +33,10 @@ class ListDataFollowerAdapter(private val listDataFollower: ArrayList<GithubUser
         fun bind(githubuser : GithubUser){
             with(itemView){
                 tv_item_username.text = githubuser.username
-                tv_item_github.text = githubuser.githubaddress
+                tv_item_github.text = githubuser.githubAddress
                 Glide.with(itemView.context)
                     .load(githubuser.avatar)
-                    .apply(RequestOptions().override(95, 95))
+                    .apply(RequestOptions().override(GithubUserAdapter.width, GithubUserAdapter.height))
                     .into(img_item_photo)
             }
         }

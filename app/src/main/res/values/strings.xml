@@ -17,5 +17,6 @@
     <string name="following">Mengikuti</string>
     <string name="follower">Pengikut</string>
     <string name="detail_user">Detail User</string>
+    <string name="detail_image">Detail Image</string>
 
 </resources>

@@ -42,11 +42,10 @@ class DetailActivity : AppCompatActivity() {
         tv_detail_follower.text = githubData.follower
         tv_detail_following.text = githubData.following
         tv_detail_gists.text = githubData.gists
-        tv_detail_githubaddress.text = githubData.githubaddress
+        tv_detail_githubaddress.text = githubData.githubAddress
         Glide.with(this)
             .load(githubData.avatar)
             .into(img_detail_photo)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

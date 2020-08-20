@@ -14,6 +14,10 @@ import kotlinx.android.synthetic.main.item_row_githubuser.view.*
 
 
 class GithubUserAdapter(private val listGithubUser: ArrayList<GithubUser>) : RecyclerView.Adapter<GithubUserAdapter.ListViewHolder>() {
+    companion object {
+        const val width = 95
+        const val height = 95
+    }
     fun setData(items: ArrayList<GithubUser>) {
         listGithubUser.clear()
         listGithubUser.addAll(items)
@@ -43,7 +47,7 @@ class GithubUserAdapter(private val listGithubUser: ArrayList<GithubUser>) : Rec
                 data.follower,
                 data.following,
                 data.gists,
-                data.githubaddress
+                data.githubAddress
             )
             val mIntent = Intent(it.context, DetailActivity::class.java)
             mIntent.putExtra(DetailActivity.EXTRA_USER, dataUserIntent)
@@ -55,10 +59,10 @@ class GithubUserAdapter(private val listGithubUser: ArrayList<GithubUser>) : Rec
         fun bind(githubuser : GithubUser){
             with(itemView){
                 tv_item_username.text = githubuser.username
-                tv_item_github.text = githubuser.githubaddress
+                tv_item_github.text = githubuser.githubAddress
                 Glide.with(itemView.context)
                     .load(githubuser.avatar)
-                    .apply(RequestOptions().override(95, 95))
+                    .apply(RequestOptions().override(width, height))
                     .into(img_item_photo)
             }
         }

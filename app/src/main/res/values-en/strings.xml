@@ -18,5 +18,5 @@
     <string name="following">following</string>
     <string name="follower">follower</string>
     <string name="detail_user">Detail User</string>
-
+    <string name="detail_image">Detail Image</string>
 </resources>

@@ -6,17 +6,17 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.githubuserapp.BuildConfig
 import com.example.githubuserapp.model.GithubUser
 import com.example.githubuserapp.view.MainActivity
-import org.json.JSONArray
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
+import org.json.JSONArray
 import org.json.JSONObject
 
 class MainViewModel : ViewModel() {
-
-    private val listUsersNonMutable = ArrayList<GithubUser>()
+    val listUsersNonMutable = ArrayList<GithubUser>()
     private val listUsersMutable = MutableLiveData<ArrayList<GithubUser>>()
 
     fun getListUsers(): LiveData<ArrayList<GithubUser>> {
@@ -24,17 +24,13 @@ class MainViewModel : ViewModel() {
     }
     fun getDataGit(context: Context) {
         val client = AsyncHttpClient()
-        client.addHeader("Authorization", "token e9b350074e3031ede78c33bda10b79515bdf4c0a")
+        client.addHeader("Authorization", BuildConfig.API_KEY)
         client.addHeader("User-Agent", "request")
         val url = "https://api.github.com/users"
         client.get(url, object : AsyncHttpResponseHandler() {
-            override fun onSuccess(
-                statusCode: Int,
-                headers: Array<out Header>?,
-                responseBody: ByteArray?
-            ) {
-                val result = responseBody?.let { String(it) }
-                result?.let { Log.d(MainActivity.TAG, it) }
+            override fun onSuccess(statusCode: Int, headers: Array<Header>, responseBody: ByteArray) {
+                val result = String(responseBody)
+                result.let { Log.d(MainActivity.TAG, it) }
                 try {
                     val jsonArray = JSONArray(result)
                     for (i in 0 until jsonArray.length()) {
@@ -68,21 +64,16 @@ class MainViewModel : ViewModel() {
     }
     private fun getDataGitDetail(usernameLogin: String, context: Context) {
         val httpClient = AsyncHttpClient()
-        httpClient.addHeader("Authorization", "token e9b350074e3031ede78c33bda10b79515bdf4c0a")
+        httpClient.addHeader("Authorization", BuildConfig.API_KEY)
         httpClient.addHeader("User-Agent", "request")
         val urlClient = "https://api.github.com/users/$usernameLogin"
 
         httpClient.get(urlClient, object : AsyncHttpResponseHandler() {
-            override fun onSuccess(
-                statusCode: Int,
-                headers: Array<out Header>?,
-                responseBody: ByteArray?
-            ) {
-                val result = responseBody?.let { String(it) }
-                Log.d(MainActivity.TAG, result.toString())
-
+            override fun onSuccess(statusCode: Int, headers: Array<Header>, responseBody: ByteArray) {
+                val result = String(responseBody)
+                Log.d(MainActivity.TAG, result)
                 try {
-                    val jsonObject = JSONObject(result.toString())
+                    val jsonObject = JSONObject(result)
                     val usersData = GithubUser()
                     usersData.username = jsonObject.getString("login")
                     usersData.name = jsonObject.getString("name")
@@ -93,7 +84,7 @@ class MainViewModel : ViewModel() {
                     usersData.follower = jsonObject.getString("followers")
                     usersData.following = jsonObject.getString("following")
                     usersData.gists = jsonObject.getString("public_gists")
-                    usersData.githubaddress = jsonObject.getString("html_url")
+                    usersData.githubAddress = jsonObject.getString("html_url")
                     listUsersNonMutable.add(usersData)
                     listUsersMutable.postValue(listUsersNonMutable)
                 } catch (e: Exception) {
@@ -121,21 +112,17 @@ class MainViewModel : ViewModel() {
     }
     fun getDataGitSearch(query: String, context: Context) {
         val httpClient = AsyncHttpClient()
-        httpClient.addHeader("Authorization", "token e9b350074e3031ede78c33bda10b79515bdf4c0a")
+        httpClient.addHeader("Authorization", BuildConfig.API_KEY)
         httpClient.addHeader("User-Agent", "request")
         val urlClient = "https://api.github.com/search/users?q=$query"
 
         httpClient.get(urlClient, object : AsyncHttpResponseHandler() {
-            override fun onSuccess(
-                statusCode: Int,
-                headers: Array<out Header>?,
-                responseBody: ByteArray?
-            ) {
-                val result = responseBody?.let { String(it) }
-                Log.d(MainActivity.TAG, result.toString())
+            override fun onSuccess(statusCode: Int, headers: Array<Header>, responseBody: ByteArray) {
+                val result = String(responseBody)
+                Log.d(MainActivity.TAG, result)
                 try {
                     listUsersNonMutable.clear()
-                    val jsonArray = JSONObject(result.toString())
+                    val jsonArray = JSONObject(result)
                     val item = jsonArray.getJSONArray("items")
                     for (i in 0 until item.length()) {
                         val jsonObject = item.getJSONObject(i)
@@ -148,12 +135,7 @@ class MainViewModel : ViewModel() {
                 }
             }
 
-            override fun onFailure(
-                statusCode: Int,
-                headers: Array<out Header>?,
-                responseBody: ByteArray?,
-                error: Throwable?
-            ) {
+            override fun onFailure(statusCode: Int, headers: Array<out Header>?, responseBody: ByteArray?, error: Throwable?) {
                 val errorMessage = when (statusCode) {
                     401 -> "$statusCode : Bad Request"
                     403 -> "$statusCode : Forbidden"

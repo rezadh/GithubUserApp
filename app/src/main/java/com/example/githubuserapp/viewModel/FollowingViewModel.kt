@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.githubuserapp.BuildConfig
 import com.example.githubuserapp.view.fragment.FollowingFragment
 import com.example.githubuserapp.model.GithubUser
 import com.loopj.android.http.AsyncHttpClient
@@ -23,7 +24,7 @@ class FollowingViewModel : ViewModel() {
     }
     fun getDataGit(context: Context, id: String) {
         val httpClient = AsyncHttpClient()
-        httpClient.addHeader("Authorization", "token e9b350074e3031ede78c33bda10b79515bdf4c0a")
+        httpClient.addHeader("Authorization", BuildConfig.API_KEY)
         httpClient.addHeader("User-Agent", "request")
         val urlClient = "https://api.github.com/users/$id/following"
 
@@ -68,7 +69,7 @@ class FollowingViewModel : ViewModel() {
 
     private fun getDataGitDetail(usernameLogin: String, context: Context) {
         val httpClient = AsyncHttpClient()
-        httpClient.addHeader("Authorization", "token e9b350074e3031ede78c33bda10b79515bdf4c0a")
+        httpClient.addHeader("Authorization", BuildConfig.API_KEY)
         httpClient.addHeader("User-Agent", "request")
         val urlClient = "https://api.github.com/users/$usernameLogin"
 
@@ -92,7 +93,7 @@ class FollowingViewModel : ViewModel() {
                     usersData.repository = jsonObject.getString("public_repos")
                     usersData.follower = jsonObject.getString("followers")
                     usersData.following = jsonObject.getString("following")
-                    usersData.githubaddress = jsonObject.getString("html_url")
+                    usersData.githubAddress = jsonObject.getString("html_url")
                     listFollowingNonMutable.add(usersData)
                     listFollowingMutable.postValue(listFollowingNonMutable)
                 } catch (e: Exception) {

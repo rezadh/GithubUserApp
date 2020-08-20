@@ -6,8 +6,9 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.githubuserapp.view.fragment.FollowerFragment
+import com.example.githubuserapp.BuildConfig
 import com.example.githubuserapp.model.GithubUser
+import com.example.githubuserapp.view.fragment.FollowerFragment
 import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.AsyncHttpResponseHandler
 import cz.msebera.android.httpclient.Header
@@ -17,13 +18,12 @@ import org.json.JSONObject
 class FollowerViewModel : ViewModel() {
     private val listFollowerNonMutable = ArrayList<GithubUser>()
     private val listFollowerMutable = MutableLiveData<ArrayList<GithubUser>>()
-
     fun getListFollower(): LiveData<ArrayList<GithubUser>> {
         return listFollowerMutable
     }
     fun getDataGit(context: Context, id: String) {
         val httpClient = AsyncHttpClient()
-        httpClient.addHeader("Authorization", "token e9b350074e3031ede78c33bda10b79515bdf4c0a")
+        httpClient.addHeader("Authorization", BuildConfig.API_KEY)
         httpClient.addHeader("User-Agent", "request")
         val urlClient = "https://api.github.com/users/$id/followers"
 
@@ -68,7 +68,7 @@ class FollowerViewModel : ViewModel() {
     }
     private fun getDataGitDetail(usernameLogin: String, context: Context) {
         val httpClient = AsyncHttpClient()
-        httpClient.addHeader("Authorization", "token e9b350074e3031ede78c33bda10b79515bdf4c0a")
+        httpClient.addHeader("Authorization", BuildConfig.API_KEY)
         httpClient.addHeader("User-Agent", "request")
         val urlClient = "https://api.github.com/users/$usernameLogin"
 
@@ -92,7 +92,7 @@ class FollowerViewModel : ViewModel() {
                     usersData.repository = jsonObject.getString("public_repos")
                     usersData.follower = jsonObject.getString("followers")
                     usersData.following = jsonObject.getString("following")
-                    usersData.githubaddress = jsonObject.getString("html_url")
+                    usersData.githubAddress = jsonObject.getString("html_url")
                     listFollowerNonMutable.add(usersData)
                     listFollowerMutable.postValue(listFollowerNonMutable)
                 } catch (e: Exception) {

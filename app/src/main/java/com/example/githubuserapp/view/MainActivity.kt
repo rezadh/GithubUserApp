@@ -52,20 +52,21 @@ class MainActivity : AppCompatActivity() {
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-
-                return false
-            }
-            override fun onQueryTextChange(newText: String): Boolean {
-                if (newText.isNotEmpty()) {
+                if (query.isNotEmpty()) {
                     listDataUser.clear()
+                    rv_list.removeAllViews()
                     viewConfig()
-                    mainViewModel.getDataGitSearch(newText, applicationContext)
                     showLoading(true)
-                    configMainViewModel(adapter)
+                    mainViewModel.getDataGitSearch(query, applicationContext)
+                    searchView.clearFocus()
                 } else {
                     return true
                 }
                 return true
+            }
+            override fun onQueryTextChange(newText: String): Boolean {
+
+                return false
             }
         })
     return true
@@ -81,7 +82,6 @@ class MainActivity : AppCompatActivity() {
     private fun viewConfig() {
         rv_list.layoutManager = LinearLayoutManager(this)
         rv_list.setHasFixedSize(true)
-
         adapter.notifyDataSetChanged()
         rv_list.adapter = adapter
     }
