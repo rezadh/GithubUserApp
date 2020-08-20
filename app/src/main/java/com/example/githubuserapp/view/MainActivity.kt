@@ -58,6 +58,7 @@ class MainActivity : AppCompatActivity() {
                     viewConfig()
                     showLoading(true)
                     mainViewModel.getDataGitSearch(query, applicationContext)
+                    searchView.onActionViewExpanded()
                     searchView.clearFocus()
                 } else {
                     return true
