@@ -18,6 +18,7 @@ class FollowingFragment : Fragment() {
 
     private val listData: ArrayList<GithubUser> = ArrayList()
     private lateinit var adapter: ListDataFollowingAdapter
+    private var dataUser: GithubUser? = null
     private lateinit var followingViewModel: FollowingViewModel
     companion object {
         val TAG: String = FollowingFragment::class.java.simpleName
@@ -32,14 +33,14 @@ class FollowingFragment : Fragment() {
         followingViewModel = ViewModelProvider(
             this, ViewModelProvider.NewInstanceFactory()
         ).get(FollowingViewModel::class.java)
-        val dataUser = requireActivity().intent.getParcelableExtra<GithubUser>(EXTRA_USER) as GithubUser
+        dataUser = requireActivity().intent.getParcelableExtra(EXTRA_USER)
         showLoading(true)
 
         rv_following_fragment.layoutManager = LinearLayoutManager(activity)
         rv_following_fragment.setHasFixedSize(true)
         rv_following_fragment.adapter = adapter
 
-        followingViewModel.getDataGit(requireActivity().applicationContext, dataUser.username.toString())
+        followingViewModel.getDataGit(requireActivity().applicationContext, dataUser?.username.toString())
         followingViewModel.getListFollowing().observe(requireActivity(), Observer { listFollower ->
             if (listFollower != null) {
                 adapter.setData(listFollower)

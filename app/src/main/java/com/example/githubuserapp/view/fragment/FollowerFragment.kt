@@ -18,7 +18,7 @@ class FollowerFragment : Fragment() {
     private val listData: ArrayList<GithubUser> = ArrayList()
     private lateinit var adapter: ListDataFollowerAdapter
     private lateinit var followerViewModel: FollowerViewModel
-
+    private var dataUser: GithubUser? = null
     companion object {
         val TAG: String = FollowerFragment::class.java.simpleName
         const val EXTRA_USER = "extra_user"
@@ -32,12 +32,12 @@ class FollowerFragment : Fragment() {
             this, ViewModelProvider.NewInstanceFactory()
         ).get(FollowerViewModel::class.java)
 
-        val dataUser = requireActivity().intent.getParcelableExtra<GithubUser>(EXTRA_USER) as GithubUser
+        dataUser = requireActivity().intent.getParcelableExtra(EXTRA_USER)
         rv_follower_fragment.layoutManager = LinearLayoutManager(activity)
         rv_follower_fragment.setHasFixedSize(true)
         rv_follower_fragment.adapter = adapter
 
-        followerViewModel.getDataGit(requireActivity().applicationContext, dataUser.username.toString())
+        followerViewModel.getDataGit(requireActivity().applicationContext, dataUser?.username.toString())
         showLoading(true)
         followerViewModel.getListFollower().observe(requireActivity(), Observer { listFollower ->
             if (listFollower != null) {

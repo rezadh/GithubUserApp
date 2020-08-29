@@ -55,7 +55,7 @@ class GithubUserAdapter(private val listGithubUser: ArrayList<GithubUser>) : Rec
         }
     }
 
-    inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(githubuser : GithubUser){
             with(itemView){
                 tv_item_username.text = githubuser.username

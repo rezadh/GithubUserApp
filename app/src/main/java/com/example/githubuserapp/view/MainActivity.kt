@@ -4,12 +4,11 @@ package com.example.githubuserapp.view
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -37,16 +36,33 @@ class MainActivity : AppCompatActivity() {
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(MainViewModel::class.java)
-        rv_list.setHasFixedSize(true)
+
         viewConfig()
         runGetDataGit()
         configMainViewModel(adapter)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_search, menu)
+        menuInflater.inflate(R.menu.main_menu, menu)
+        val searchMenuItem = menu.findItem(R.id.search)
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.search).actionView as SearchView
+        searchMenuItem.setOnActionExpandListener(object : MenuItem.OnActionExpandListener {
+            override fun onMenuItemActionExpand(item: MenuItem): Boolean {
+
+                return true
+            }
+
+            override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
+                listDataUser.clear()
+                rv_list.removeAllViews()
+                viewConfig()
+                showLoading(true)
+                mainViewModel.getDataGit(applicationContext)
+
+                return true
+            }
+        })
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = resources.getString(R.string.search_hint)
@@ -65,18 +81,27 @@ class MainActivity : AppCompatActivity() {
                 }
                 return true
             }
+
             override fun onQueryTextChange(newText: String): Boolean {
 
                 return false
             }
+
         })
+
     return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu) {
-            val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
-            startActivity(mIntent)
+        when (item.itemId) {
+            R.id.setting -> {
+                val mIntent = Intent(this, SettingsActivity::class.java)
+                startActivity(mIntent)
+            }
+            R.id.favorite -> {
+                val mIntent = Intent(this, FavoriteActivity::class.java)
+                startActivity(mIntent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -92,7 +117,10 @@ class MainActivity : AppCompatActivity() {
         showLoading(true)
     }
 
-
+    override fun onResume() {
+        mainViewModel.getDataGit(applicationContext)
+        super.onResume()
+    }
     private fun configMainViewModel(adapter: GithubUserAdapter) {
         mainViewModel.getListUsers().observe(this, Observer { listUsers ->
             if (listUsers != null) {

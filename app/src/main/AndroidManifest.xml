@@ -2,8 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.githubuserapp">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <permission
+        android:name="com.example.githubuserapp.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.example.githubuserapp.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,9 +21,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
-        <activity android:name=".view.DetailActivity">
+        <receiver
+            android:name=".broadcast.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false" />
 
-        </activity>
+        <activity
+            android:name=".view.SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity android:name=".view.FavoriteActivity" />
+
+
+        <activity android:name=".view.DetailActivity" />
         <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +40,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:name=".provider.MyProvider"
+            android:authorities="com.example.githubuserapp"
+            android:enabled="true"
+            android:exported="true"
+            android:readPermission="com.example.githubuserapp.READ_DATABASE"
+            android:writePermission="com.example.githubuserapp.WRITE_DATABASE" />
+
     </application>
 
 </manifest>

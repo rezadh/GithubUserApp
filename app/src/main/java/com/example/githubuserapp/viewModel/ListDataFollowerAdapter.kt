@@ -29,7 +29,7 @@ class ListDataFollowerAdapter(private val listDataFollower: ArrayList<GithubUser
         holder.bind(listDataFollower[position])
     }
 
-    inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+    class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(githubuser : GithubUser){
             with(itemView){
                 tv_item_username.text = githubuser.username
