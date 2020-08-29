@@ -102,7 +102,7 @@ class AlarmReceiver : BroadcastReceiver() {
             )
         }
 
-        Toast.makeText(context, "Daily Reminder Activated", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, context.getString(R.string.daily_reminder_active), Toast.LENGTH_SHORT).show()
     }
 
     fun cancelAlarm(context: Context, type: String) {
@@ -113,7 +113,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
         pendingIntent.cancel()
         alarmManager.cancel(pendingIntent)
-        Toast.makeText(context, "Daily Reminder Canceled", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, context.getString(R.string.daily_reminder_cancel), Toast.LENGTH_SHORT).show()
     }
 
 }

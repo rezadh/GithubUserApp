@@ -16,13 +16,13 @@
     <string name="tv_following">Mengikuti</string>
     <string name="following">Mengikuti</string>
     <string name="follower">Pengikut</string>
-    <string name="detail_user">Detail User</string>
-    <string name="detail_image">Detail Image</string>
-    <string name="fav_true">fav true</string>
-    <string name="fav_false">fav false</string>
+    <string name="detail_user">Detail pengguna</string>
+    <string name="detail_image">Detail gambar</string>
     <string name="title_activity_settings">SettingsActivity</string>
-    <string name="setting">setting</string>
+    <string name="setting">pengaturan</string>
     <string name="github.com">https://github.com/rezadh</string>
+    <string name="fab_fav_delete">menghapus user dari favorite</string>
+    <string name="fab_fav_insert">menambahkan user dari favorite</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
@@ -37,7 +37,10 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <string name="daily_reminder">daily reminder 9.00 AM</string>
-    <string name="daily_message">Let`s find your Favorite User on Github</string>
+    <string name="daily_reminder">pengingat harian pukul 9.00 AM</string>
+    <string name="daily_message">Lihat pengguna Github sekarang</string>
+    <string name="daily_reminder_active">Pengingat Harian Diaktifkan</string>
+    <string name="daily_reminder_cancel">Pengingat Harian Dibatalkan</string>
+
 
 </resources>

@@ -131,7 +131,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                 if (statusFavorite) {
                     val idUser = githubUser?.username.toString()
                     favoriteHelper.deleteById(idUser)
-                    Toast.makeText(this, "terhapus", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.fab_fav_delete), Toast.LENGTH_SHORT).show()
                     isFavorite(false)
                     statusFavorite = true
                 } else {
@@ -150,7 +150,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
                     statusFavorite = false
                     contentResolver.insert(CONTENT_URI, values)
-                    Toast.makeText(this, "berhasil", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.fab_fav_insert), Toast.LENGTH_SHORT).show()
                     isFavorite(true)
                 }
             }
