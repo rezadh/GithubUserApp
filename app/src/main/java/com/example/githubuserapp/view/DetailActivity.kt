@@ -42,7 +42,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     companion object {
         const val EXTRA_USER = "extra_user"
     }
-
+ //testing
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
