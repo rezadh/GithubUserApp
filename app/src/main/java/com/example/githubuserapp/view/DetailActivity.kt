@@ -90,7 +90,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onBackPressed() {
-
         startActivity(Intent(this@DetailActivity, MainActivity::class.java))
     }
 
@@ -148,10 +147,11 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                     values.put(GITHUBADDRESS, githubUser?.githubAddress)
                     values.put(FAVORITE, "favorite")
 
-                    statusFavorite = false
                     contentResolver.insert(CONTENT_URI, values)
                     Toast.makeText(this, getString(R.string.fab_fav_insert), Toast.LENGTH_SHORT).show()
                     isFavorite(true)
+                    statusFavorite = false
+
                 }
             }
         }

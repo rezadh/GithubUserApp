@@ -21,7 +21,7 @@ internal class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         private const val DATABASE_NAME = "dbgithubuser"
         private const val DATABASE_VERSION = 1
         private const val SQL_CREATE_TABLE_GITHUB_USER = "CREATE TABLE $TABLE_FAVORITE_NAME" +
-                "($USERNAME TEXT NOT NULL," +
+                "($USERNAME TEXT PRIMARY KEY," +
                 "$NAME TEXT NOT NULL," +
                 "$AVATAR TEXT NOT NULL," +
                 "$COMPANY TEXT NOT NULL," +
