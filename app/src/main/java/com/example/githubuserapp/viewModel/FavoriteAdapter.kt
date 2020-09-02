@@ -1,8 +1,6 @@
 package com.example.githubuserapp.viewModel
 
-import android.app.Activity
 import android.content.Intent
-import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +14,7 @@ import com.example.githubuserapp.view.DetailActivity
 import kotlinx.android.synthetic.main.item_row_githubuser.view.*
 import java.util.ArrayList
 
-class FavoriteAdapter(private val activity: Activity) : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
+class FavoriteAdapter : RecyclerView.Adapter<FavoriteAdapter.FavoriteViewHolder>() {
     var listFavorites = ArrayList<GithubUserFavorite>()
         set(listFavorites) {
             if (listFavorites.size > 0) {

@@ -12,7 +12,7 @@ import com.example.githubuserapp.R
 
 class SectionPagerAdapter(private val mContext: Context, fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
     @StringRes
-    private val TAB_TITLES = intArrayOf(
+    private val tabTitles = intArrayOf(
         R.string.follower,
         R.string.following
     )
@@ -32,7 +32,7 @@ class SectionPagerAdapter(private val mContext: Context, fm: FragmentManager) : 
     }
     @Nullable
     override fun getPageTitle(position: Int): CharSequence? {
-        return mContext.resources.getString(TAB_TITLES[position])
+        return mContext.resources.getString(tabTitles[position])
     }
     override fun getCount(): Int {
         return pages.size
